@@ -60,9 +60,7 @@ public class GenerateKeys {
 			
 			writePemFile(gk.getPrivateKey(), "RSA PRIVATE KEY", "KeyPair/rsa_pem_priv");
 			writePemFile(gk.getPublicKey(), "RSA PUBLIC KEY", "KeyPair/rsa_pem_pub");
-		} catch (NoSuchAlgorithmException | NoSuchProviderException e) {
-			System.err.println(e.getMessage());
-		} catch (IOException e) {
+		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
 
