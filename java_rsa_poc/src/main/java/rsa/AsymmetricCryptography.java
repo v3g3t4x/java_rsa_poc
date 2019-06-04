@@ -8,6 +8,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.security.GeneralSecurityException;
 import java.security.InvalidKeyException;
+import java.security.Key;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
@@ -61,13 +62,13 @@ public class AsymmetricCryptography {
 		fos.close();
 	}
 
-	public String encryptText(String msg, PrivateKey key) throws NoSuchAlgorithmException, NoSuchPaddingException,
+	public String encryptText(String msg, Key key) throws NoSuchAlgorithmException, NoSuchPaddingException,
 			UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
 		this.cipher.init(Cipher.ENCRYPT_MODE, key);
 		return Base64.encodeBase64String(cipher.doFinal(msg.getBytes("UTF-8")));
 	}
 
-	public String decryptText(String msg, PublicKey key)
+	public String decryptText(String msg, Key key)
 			throws InvalidKeyException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException {
 		this.cipher.init(Cipher.DECRYPT_MODE, key);
 		return new String(cipher.doFinal(Base64.decodeBase64(msg)), "UTF-8");
@@ -86,7 +87,7 @@ public class AsymmetricCryptography {
 		PrivateKey privateKey = ac.getPrivate("KeyPair/privateKey");
 		PublicKey publicKey = ac.getPublic("KeyPair/publicKey");
 
-		String msg = "Cryptography is fun!";
+		String msg = "Password123";
 		String encrypted_msg = ac.encryptText(msg, privateKey);
 		String decrypted_msg = ac.decryptText(encrypted_msg, publicKey);
 		System.out.println("Original Message: " + msg + "\nEncrypted Message: " + encrypted_msg+"\nDecrypted Message: " + decrypted_msg);
