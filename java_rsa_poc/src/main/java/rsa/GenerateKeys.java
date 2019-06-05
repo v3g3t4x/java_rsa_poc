@@ -53,11 +53,11 @@ public class GenerateKeys {
 		try {
 			gk = new GenerateKeys(1024);
 			gk.createKeys();
-			System.out.println( gk.getPublicKey().getFormat());
-			System.out.println( gk.getPublicKey().getAlgorithm());
+			System.out.println(gk.getPublicKey().getFormat());
+			System.out.println(gk.getPublicKey().getAlgorithm());
 			gk.writeToFile("KeyPair/publicKey", gk.getPublicKey().getEncoded());
 			gk.writeToFile("KeyPair/privateKey", gk.getPrivateKey().getEncoded());
-			
+
 			writePemFile(gk.getPrivateKey(), "RSA PRIVATE KEY", "KeyPair/rsa_pem_priv");
 			writePemFile(gk.getPublicKey(), "RSA PUBLIC KEY", "KeyPair/rsa_pem_pub");
 		} catch (Exception e) {
@@ -65,8 +65,8 @@ public class GenerateKeys {
 		}
 
 	}
-	static void writePemFile(Key key, String description, String filename)
-			throws FileNotFoundException, IOException {
+
+	static void writePemFile(Key key, String description, String filename) throws FileNotFoundException, IOException {
 		PemFile pemFile = new PemFile(key, description);
 		pemFile.write(filename);
 		System.out.println(String.format("%s successfully writen in file %s.", description, filename));

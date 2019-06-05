@@ -24,8 +24,9 @@ import org.apache.commons.codec.binary.Base64;
 public class AsymmetricCryptography {
 	private Cipher cipher;
 
-	public AsymmetricCryptography() throws NoSuchAlgorithmException, NoSuchPaddingException {
+	public AsymmetricCryptography() throws Exception {
 		this.cipher = Cipher.getInstance("RSA");
+		// this.cipher=Cipher.getInstance("RSA/None/PKCS1Padding", "BC");
 	}
 
 	// https://docs.oracle.com/javase/8/docs/api/java/security/spec/PKCS8EncodedKeySpec.html
@@ -87,11 +88,12 @@ public class AsymmetricCryptography {
 		PrivateKey privateKey = ac.getPrivate("KeyPair/privateKey");
 		PublicKey publicKey = ac.getPublic("KeyPair/publicKey");
 
-		String msg = "Password123";
+		String msg = "TERZANIGAY";
 		String encrypted_msg = ac.encryptText(msg, privateKey);
-		String decrypted_msg = ac.decryptText(encrypted_msg, publicKey);
-		System.out.println("Original Message: " + msg + "\nEncrypted Message: " + encrypted_msg+"\nDecrypted Message: " + decrypted_msg);
 
-		
+		String decrypted_msg = ac.decryptText(encrypted_msg, publicKey);
+		System.out.println("Original Message: " + msg + "\nEncrypted Message: " + encrypted_msg
+				+ "\nDecrypted Message: " + decrypted_msg);
+
 	}
 }
