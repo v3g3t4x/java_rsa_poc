@@ -88,7 +88,7 @@ public class AsymmetricCryptography {
 		PrivateKey privateKey = ac.getPrivate("KeyPair/privateKey");
 		PublicKey publicKey = ac.getPublic("KeyPair/publicKey");
 
-		String msg = "TERZANIGAY";
+		String msg = "PROVA";
 		String encrypted_msg = ac.encryptText(msg, privateKey);
 
 		String decrypted_msg = ac.decryptText(encrypted_msg, publicKey);
